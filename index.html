@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div style="margin: auto; width: 50%;">
+        <p id="msg" onclick="gameMessage()">Click start</p>
+
+
+        <div id="divP">
+            <div id="start" onclick="startF()">S</div>
+            <div id="div1" class="boundary"></div>
+            <div id="div2" class="boundary"></div>
+            <div id="div3" class="boundary"></div>
+            <div id="div4" class="boundary"></div>
+            <div id="div5" class="boundary"></div>
+            <div id="end">E</div>
+        </div>
+
+        <p>Bonne chance</p>
+    </div>
+
+
+
+</body>
+
+<script>
+
+    const x = document.getElementsByClassName("boundary");
+   
+    const y = document.getElementById("end");
+
+    var gameOn = true;
+
+    function startF() {
+
+        document.getElementById("msg").innerHTML = "Jeu en cours";
+
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.backgroundColor = "black";
+        }
+
+        x[2].style.zIndex = "0";
+        for (let i = 0; i < x.length; i++) {
+            x[i].addEventListener("mouseover", loseF);
+        }
+
+        y.addEventListener("mouseover", endF);
+
+
+    }
+
+    function loseF() {
+        if (gameOn == true) {
+            gameOn = false;
+            x[2].style.zIndex = "-1";
+            for (let i = 0; i < x.length; i++) {
+                x[i].style.backgroundColor = "red";
+            }
+            document.getElementById("msg").innerHTML = "Sike !";
+        }
+    }
+
+    function gameMessage() {
+        document.getElementById("msg").innerHTML = "Trouvez la sortie";
+    }
+
+    function endF() {
+        if (gameOn == true) {
+            x[2].style.zIndex = "-1";
+            for (let i = 0; i < x.length; i++) {
+                x[i].style.backgroundColor = "green";
+            }
+            document.getElementById("msg").innerHTML = "Félicitation";
+            gameOn = false;
+        }
+    }
+
+</script>
+
+
+</html>
